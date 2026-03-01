@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Stock Average Price Calculator</h3>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Qty on Hand:</label><br>
+    <input type="number" step="any" name="qty_on_hand" value="{{ qty_on_hand|default_if_none:'' }}"><br><br>
+
+    <label>Current Average Price:</label><br>
+    <input type="number" step="any" name="avg_price" value="{{ avg_price|default_if_none:'' }}"><br><br>
+
+    <label>Planned New Purchase Qty:</label><br>
+    <input type="number" step="any" name="new_qty" value="{{ new_qty|default_if_none:'' }}"><br><br>
+
+    <label>Current Stock Price:</label><br>
+    <input type="number" step="any" name="new_price" value="{{ new_price|default_if_none:'' }}"><br><br>
+
+    <button type="submit">Calculate</button>
+    <a href="/calculator/"><button type="button">Clear All</button></a>
+</form>
+
+{% if result %}
+<h4>New Average Price: {{ result }}</h4>
+{% endif %}
+
+{% endblock %}
